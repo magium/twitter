@@ -71,7 +71,7 @@ $this->username = 'username';
 $this->password = 'password';
 ```
 
-(https://www.youtube.com/watch?v=JdeGTb_ZV_I)[Note that you should be familiar with AbstractConfigurableElements to do this]
+[https://www.youtube.com/watch?v=JdeGTb_ZV_I](Note that you should be familiar with AbstractConfigurableElements to do this)
 
 ## Not in Magium
 
