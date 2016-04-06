@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/magium/twitter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/magium/twitter/?branch=master)
+
 # magium/twitter
 
 This is a simple library to help browser tests perform OAuth logins to Twitter.
