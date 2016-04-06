@@ -1,0 +1,25 @@
+{
+  "name" : "magium/twitter",
+  "type": "library",
+  "description": "Provides a mechanism for logging in to Twitter to validate OAuth-based tests",
+  "keywords": ["selenium", "webdriver", "testing", "twitter"],
+  "homepage": "https://github.com/magium/twitter",
+  "license": "ASL-2.0",
+  "authors": [
+    {
+      "name": "Kevin Schroeder",
+      "email": "kschroeder@mirageworks.com",
+      "homepage": "http://magiumlib.com/",
+      "role": "Developer"
+    }
+  ],
+  "require" : {
+    "magium/magium": ">=0.0.51 <2.0.0"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Magium\\Twitter\\" : "lib/",
+      "Tests\\Magium\\Twitter\\" : "tests/"
+    }
+  }
+}
