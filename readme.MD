@@ -75,55 +75,46 @@ $this->password = 'password';
 
 [Note that you should be familiar with AbstractConfigurableElements to do this](https://www.youtube.com/watch?v=JdeGTb_ZV_I)
 
-## Not in Magium
+##Sign In With Twitter
 
-This library doesn't require Magium to run.  Well, actually it does, but it doesn't need the abstract test class.  It's a little verbose, but this is what it would look like (you could also use a DIC to manage this).
+Using the sign-in-with-Twitter functionality
 
 ```
-<?php
 
-namespace Tests\Magium\Twitter;
-
-use Facebook\WebDriver\Remote\DesiredCapabilities;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Facebook\WebDriver\WebDriverBy;
-use Magium\Twitter\Actions\AuthenticateTwitter;
-use Magium\Twitter\Identities\Twitter;
-use Magium\Util\Configuration\ClassConfigurationReader;
-use Magium\Util\Configuration\ConfigurationCollector\DefaultPropertyCollector;
-use Magium\Util\Configuration\ConfigurationReader;
-use Magium\Util\Configuration\EnvironmentConfigurationReader;
-use Magium\Util\Configuration\StandardConfigurationProvider;
-use Magium\WebDriver\ExpectedCondition;
-use Magium\WebDriver\WebDriver;
-
-class NoAbstractTestClassTest extends \PHPUnit_Framework_TestCase
-{
-
-    public function testWithoutMagium()
+    public function testSignInWithTwitter()
     {
-        // Do some stuff to get to the Twitter authenticaation page
-
-        // Start from here
-
-        $configurationProvider = new StandardConfigurationProvider(
-            new ConfigurationReader(),
-            new ClassConfigurationReader(),
-            new EnvironmentConfigurationReader()
-        );
-        $collector = new DefaultPropertyCollector();
-
-        $action = new AuthenticateTwitter(
-            $webDriver,
-            new \Magium\Twitter\Themes\Twitter($configurationProvider, $collector),
-            new \Magium\Twitter\Identities\Twitter($configurationProvider, $collector)
-        );
-
-        // Everything up to here could have been done using a DIC.
-
+        
+        $action = $this->getAction(SignInWithTwitter::ACTION);
+        /* @var $action SignInWithTwitter */
         $action->execute();
-        $webDriver->quit();
+
     }
 
-}
 ```
+
+##Log In To Twitter
+
+To log in via the Twitter front page...
+
+```
+
+    public function testAuthenticate()
+    {
+        $this->getAction(AuthenticateTwitter::ACTION)->execute();
+    }
+
+```
+
+##To tweet
+
+```
+
+    public function testTweet()
+    {
+        $text = 'This is text I would like to tweet';
+
+        $this->getAction(AuthenticateTwitter::ACTION)->execute();
+        $this->getAction(Tweet::ACTION)->tweet($text);
+    }
+```
+
