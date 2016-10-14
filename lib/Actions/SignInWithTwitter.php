@@ -3,29 +3,24 @@
 namespace Magium\Twitter\Actions;
 
 use Facebook\WebDriver\Exception\NoSuchElementException;
-use Magium\AbstractTestCase;
-use Magium\Commands\Open;
 use Magium\Twitter\Themes\Twitter;
 use Magium\Twitter\Identities\Twitter as TwitterIdentity;
 use Magium\WebDriver\WebDriver;
 
-class AuthenticateTwitter
+class SignInWithTwitter
 {
-    const ACTION = 'Magium\Twitter\Actions\AuthenticateTwitter';
+    const ACTION = 'Magium\Twitter\Actions\SignInWithTwitter';
     
     protected $webDriver;
     protected $theme;
     protected $identity;
-    protected $open;
     
     public function __construct(
         WebDriver $webDriver,
-        Open $open,
         Twitter $theme,
         TwitterIdentity $identity
     )
     {
-        $this->open = $open;
         $this->webDriver    = $webDriver;
         $this->theme        = $theme;
         $this->identity     = $identity;
@@ -33,20 +28,12 @@ class AuthenticateTwitter
     
     public function execute($remember = false)
     {
-        $url = $this->webDriver->getCurrentURL();
-        if ($url !== $this->theme->getTwitterUrl()) {
-            $this->open->open($this->theme->getTwitterUrl());
-        }
-
         try {
-            $element = $this->webDriver->byXpath($this->theme->getLoginButtonXpath());
-            $element->click();
-
-            $element = $this->webDriver->byXpath($this->theme->getSiteUsernameXpath());
+            $element = $this->webDriver->byXpath($this->theme->getUsernameXpath());
             $element->clear();
             $element->sendKeys($this->identity->getUsername());
 
-            $element = $this->webDriver->byXpath($this->theme->getSitePasswordXpath());
+            $element = $this->webDriver->byXpath($this->theme->getPasswordXpath());
             $element->clear();
             $element->sendKeys($this->identity->getPassword());
 
@@ -58,7 +45,7 @@ class AuthenticateTwitter
         } catch (NoSuchElementException $e) {
             // Presuming that we're logged in
         }
-        $element = $this->webDriver->byXpath($this->theme->getSiteSignInXpath());
+        $element = $this->webDriver->byXpath($this->theme->getSignInXpath());
         $element->click();
     }
 

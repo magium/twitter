@@ -4,6 +4,7 @@ namespace Tests\Magium\Twitter;
 
 use Magium\AbstractTestCase;
 use Magium\Twitter\Actions\AuthenticateTwitter;
+use Magium\Twitter\Actions\SignInWithTwitter;
 use Magium\Twitter\Identities\Twitter;
 use Magium\WebDriver\ExpectedCondition;
 use Magium\WebDriver\WebDriver;
@@ -11,8 +12,14 @@ use Magium\WebDriver\WebDriver;
 class AuthenticationTest extends AbstractTestCase
 {
 
-    public function testAuthentication()
+    public function testAuthenticate()
     {
+        $this->getAction(AuthenticateTwitter::ACTION)->execute();
+    }
+
+    public function testSignInWithTwitter()
+    {
+        $this->markTestSkipped('This test requires a local Magium environment.  It will not work.');
         // This test is based off of my own test environment and so everything up until the Twitter authentication will
         // not work.  So ignore the first part.
 
@@ -22,15 +29,24 @@ class AuthenticationTest extends AbstractTestCase
         $element = $this->byXpath('//div[@data-strategy="twitter"]');
         $this->webdriver->wait()->until(ExpectedCondition::visibilityOf($element));
         $this->byXpath('//div[@data-strategy="twitter"]')->click();
-        
+
+
+
+
+
+
         // This part should work for you
-        $action = $this->getAction(AuthenticateTwitter::ACTION);
-        /* @var $action AuthenticateTwitter */
+        $action = $this->getAction(SignInWithTwitter::ACTION);
+        /* @var $action SignInWithTwitter */
         $action->execute();
+
+
+
     }
 
     public function testAuthenticationWorksEvenIfCurrentUserIsLoggedIn()
     {
+        $this->markTestSkipped('This test requires a local Magium environment.  It will not work.');
         // This test is based off of my own test environment and so everything up until the Twitter authentication will
         // not work.  So ignore the first part.
 
@@ -53,7 +69,7 @@ class AuthenticationTest extends AbstractTestCase
         $this->byXpath('//div[@data-strategy="twitter"]')->click();
 
         // This part should work for you
-        $action = $this->getAction(AuthenticateTwitter::ACTION);
+        $action = $this->getAction(SignInWithTwitter::ACTION);
         /* @var $action AuthenticateTwitter */
         $action->execute();
 
