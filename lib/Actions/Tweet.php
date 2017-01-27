@@ -31,7 +31,10 @@ class Tweet
 
         $this->webDriver->getKeyboard()->sendKeys($text);
 
+        $this->webDriver->wait(5)->until(ExpectedCondition::elementExists($this->theme->getTweetButton(), WebDriver::BY_XPATH));
         $element = $this->webDriver->byXpath($this->theme->getTweetButton());
+
+        $this->webDriver->wait(5)->until(ExpectedCondition::visibilityOf($element));
         $element->click();
 
     }
