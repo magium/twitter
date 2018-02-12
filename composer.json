@@ -4,7 +4,7 @@
   "description": "Provides a mechanism for logging in to Twitter to validate OAuth-based tests",
   "keywords": ["selenium", "webdriver", "testing", "twitter"],
   "homepage": "https://github.com/magium/twitter",
-  "license": "ASL-2.0",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Kevin Schroeder",
